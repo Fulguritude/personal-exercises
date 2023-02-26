@@ -1,0 +1,38 @@
+d02
+
+
+
+"Decorators, multiprocessing, lamba, build package" (missing 'd' in lamb'd'a)
+=> Decorators, multiprocessing, lambda, build package
+
+
+ex01
+"function that returns and object with the right attributes" ('an', not 'and', as well as clarity improvement)
+=> function that returns an 'ObjectC' object with the right attributes
+
+
+ex03
+"Huston Rockets"
+=> Houston Rockets
+
+"Warriros"
+=> Warriors
+
+"Implement a `Loadjson` class that open, read, and parse a json file, store it in a data attribute as a nested dict, and close the file at the end of the usage.
+you..."
+=> Implement a `Loadjson` class that opens, reads, and parses a json file; stores its contents in a `data` attribute as a nested dict, and then closes the file once it isn't needed anymore.
+You...
+
+"print_formated"
+=> print_formatted
+
+
+ex04
+"I will have 2 functionnalities"
+=> It will have 2 functionalities
+
+"progresse bar (day00 ex09)"
+=> progress bar (day00 ex10)
+
+
+

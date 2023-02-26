@@ -1,0 +1,13 @@
+d03
+
+ex03
+"colors filters"
+=>color filters
+
+
+"This argument should be select by default if not given."
+=>This argument should be selected by default if not given.
+=> Aussi le sens est pas clair, quel est l'argument optionnel, les weights ? si oui revoir la phrase suivante aussi
+
+
+

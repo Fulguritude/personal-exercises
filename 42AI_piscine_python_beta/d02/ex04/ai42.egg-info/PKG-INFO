@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: ai42
+Version: 1.0.0
+Summary: A small Python Piscine package example
+Home-page: UNKNOWN
+Author: Tristan Duquesne
+Author-email: tduquesn@student.42.fr
+License: UNKNOWN
+Description: Long description for 42ai test package
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown

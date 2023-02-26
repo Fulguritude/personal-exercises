@@ -1,0 +1,14 @@
+d01
+
+
+Ex00:
+"adding these lines" (il n'y en a qu'une)
+=> adding the following line 
+
+
+Ex03:
+"takes a text as input and split it on `sep` parameter, and `yield` the words"
+=>takes a text as input, uses the string `sep` as a splitting parameter, and `yield`s the resulting substrings.
+
+
+

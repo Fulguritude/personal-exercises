@@ -1,0 +1,24 @@
+d04
+
+
+ex00
+
+"The methods returns the dataset"
+=>The method returns the dataset
+
+
+ex02
+
+"Write a function `ProportionBySport` which takes four arguments:" (incoherent capitalization of function name)
+=>Write a function `proportionBySport` which takes four arguments:
+
+
+ex07
+"which take as an input two variable names"
+=>which take as input two variable names
+
+"and output comparison plots for each feature against different"
+=> ... ? Je comprends même pas le sens de la phrase tellement elle est cassée xd Il en manque un bout non ?
+
+
+

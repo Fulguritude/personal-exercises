@@ -1,0 +1,37 @@
+d00
+
+
+Ex00:
+"You are going to master python path !""
+=> You are going to learn how to master the setup of the python path !
+
+"In order to have a simple life lets create a script the check if the right python version is installed and install it if it is not, you are going to use miniconda installer : [TODO MISSING LINK].
+You will (je suppose que tu veux dire "devrez") also be able to install packages via pip using this script."
+=> In order to make our life easier, let's create a script to check if the right version of python is installed, and install it if it isn't. You are going to use the 'miniconda' installer: [TODO MISSING LINK].
+You should also be able to install packages via pip using this script.
+
+=> Some other fixes to new text.
+
+
+Ex03:
+
+"text_analyzer()
+   What is the text to analyse?"
+
+=> analyse en british, analyze en américain, mais il faut plutôt rester cohérent - soit l'un soit l'autre.
+
+
+Ex08:
+"alpha numeric caracteres"
+=> alphanumeric characters
+
+
+Ex09:
+"You have to count of the number of trials and print them when the user wins."
+=> You have to count of the number of trials and print that number (il n'y a qu'un seul nombre) when the user wins.
+
+"You got it at the first try!"
+=>You got it on your first try!
+
+
+
