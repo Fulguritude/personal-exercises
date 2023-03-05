@@ -1,3 +1,6 @@
+open Tree;;
+open Canvas;;
+
 type 'a tree = Nil | Node of 'a * 'a tree * 'a tree ;;
 
 let rec height (t: 'a tree): int =
