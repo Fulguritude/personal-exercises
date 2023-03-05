@@ -6,12 +6,16 @@ let rec converges
 	let new_x = f x in
 	let result =
 		if new_x = x then
+		(
 			true
+		)
 		else
+		(
 			match iterations with
 			| i when i > 0 -> converges (f) (new_x) (i - 1)
 			(* | 0            -> false *)
 			| _            -> false
+		)
 	in
 	result
 ;;

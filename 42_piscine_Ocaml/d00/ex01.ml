@@ -12,12 +12,14 @@ let rec rec_countdown (a : int) : unit =
 	)
 ;;
 
+(*
 let countdown (a : int) : unit =
 	for i = a to 0 do
 		print_int(i);
 		print_char('\n')
 	done
 ;;
+*)
 
 rec_countdown(3);
 rec_countdown(0);

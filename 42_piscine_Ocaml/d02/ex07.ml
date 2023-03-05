@@ -1,6 +1,13 @@
 type phospate = string;;
 type deoxyribose = string;;
-type nucleobase = A | T | C | G | U | None;;
+type nucleobase =
+	| A
+	| T
+	| C
+	| G
+	| U
+	| None
+;;
 
 type nucleotide =
 {
@@ -271,9 +278,13 @@ let decode_rna (strand: rna): protein =
 		| h :: t ->
 		(
 			if f (h) then
+			(
 				[]
+			)
 			else
-				h :: list_cutoff_at_filter (f) (t) 
+			(
+				h :: list_cutoff_at_filter (f) (t)
+			)
 		)
 	in
 	list_cutoff_at_filter (fun x -> x = Stop) aminoacids
@@ -285,11 +296,9 @@ let decode_rna (strand: rna): protein =
 
 let hlx_test   = generate_helix (50) ;;
 let hlx_pair   = complementary_helix (hlx_test) ;;
+let rna_strand = generate_rna (hlx_test) ;;
+let protein    = decode_rna (rna_strand) ;;
 print_endline(string_of_helix(hlx_test));;
 print_endline(string_of_helix(hlx_pair));;
-let rna_strand = generate_rna (hlx_test) ;;
 print_endline(string_of_helix(rna_strand));;
-let protein    = decode_rna (rna_strand) ;;
 print_endline(string_of_protein(protein));;
-
-
