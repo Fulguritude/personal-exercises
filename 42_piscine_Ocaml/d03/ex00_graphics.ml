@@ -18,6 +18,8 @@ module Canvas = struct
 	let frame_duration = 1. /. 60. ;;
 	let window_w = 800 ;;
 	let window_h = 600 ;;
+	let window_mid_w = window_w / 2 ;;
+	let window_mid_h = window_h / 2 ;;
 
 	let string_of_window_size (w: int) (h: int): string =
 		" " ^ string_of_int(w) ^ "x" ^ string_of_int(h)
@@ -50,6 +52,9 @@ module Tree = struct
 
 	type 'a tree = Nil | Node of 'a * 'a tree * 'a tree ;;
 
+	let node_h     = 20 ;;
+	let node_mid_h = node_h / 2 ;;
+
 	(* Graphics.open_graph *)
 	(* Graphics.lineto *)
 	(* Graphics.moveto *)
@@ -72,29 +77,28 @@ module Tree = struct
 	;;
 
 	let rec draw_tree_node (node : 'a tree): unit =
-		let node_h = 50 in
 		let x_pos = 20 in
-		let y_pos = (Canvas.window_h - node_h) / 2 in
+		let y_pos = (Canvas.window_mid_h - node_mid_h) / 2 in
 		match node with
 		| Nil ->
 		(
 			draw_square (x_pos) (y_pos) (node_h);
-			moveto (x_pos + 5) (y_pos + node_h / 2 - 5);
+			moveto (x_pos + 5) (y_pos + node_mid_h - 5);
 			draw_string "Nil"
 		)
 		| Node (value, child1, child2) ->
 		(
 			draw_square (x_pos) (y_pos) (node_h);
-			moveto (x_pos + 5) (y_pos + node_h / 2 - 5);
+			moveto (x_pos + 5) (y_pos + node_mid_h - 5);
 			draw_string "Value";
-			moveto (x_pos + node_h      ) (y_pos + node_h / 2      );
-			lineto (x_pos + node_h + 20 ) (y_pos + node_h / 2 + 30 );
-			moveto (x_pos + node_h      ) (y_pos + node_h / 2      );
-			lineto (x_pos + node_h + 20 ) (y_pos + node_h / 2 - 30 );
-			draw_square (x_pos + node_h + 20) (y_pos + node_h / 2 + 10 ) (node_h);
-			draw_square (x_pos + node_h + 20) (y_pos + node_h / 2 - 50 ) (node_h);
-			moveto (x_pos + node_h + 20 + 5) (y_pos + node_h / 2 + 30 - 5 / 2); draw_string "Nil";
-			moveto (x_pos + node_h + 20 + 5) (y_pos + node_h / 2 - 30 - 5 / 2); draw_string "Nil";
+			moveto (x_pos + node_h      ) (y_pos + node_mid_h      );
+			lineto (x_pos + node_h + 20 ) (y_pos + node_mid_h + 30 );
+			moveto (x_pos + node_h      ) (y_pos + node_mid_h      );
+			lineto (x_pos + node_h + 20 ) (y_pos + node_mid_h - 30 );
+			draw_square (x_pos + node_h + 20) (y_pos + node_mid_h + 10 ) (node_h);
+			draw_square (x_pos + node_h + 20) (y_pos + node_mid_h - 50 ) (node_h);
+			moveto (x_pos + node_h + 20 + 5) (y_pos + node_mid_h + 30 - 5 / 2); draw_string "Nil";
+			moveto (x_pos + node_h + 20 + 5) (y_pos + node_mid_h - 30 - 5 / 2); draw_string "Nil";
 
 		)
 	;;
@@ -110,4 +114,5 @@ let draw_node_triplet (): unit =
 	Tree.draw_tree_node(node);
 ;;
 
-Canvas.run (draw_node_triplet);
+(* To test, uncomment the below *)
+(* Canvas.run (draw_node_triplet); *)
