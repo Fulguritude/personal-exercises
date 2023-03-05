@@ -2,26 +2,13 @@
 (* https://ocaml.github.io/graphics/graphics/Graphics/index.html *)
 
 open Graphics;;
-open Ex00_graphics.Tree;;
+(* open Ex00_graphics.Tree;; *)
 open Ex00_graphics.Canvas;;
 
-type 'a tree = Nil | Node of 'a * 'a tree * 'a tree ;;
 
-let rec height (t: 'a tree): int =
-	match t with
-	| Nil -> 0
-	| Node (_, child1, child2) -> 1 + max (height(child1)) (height(child2))
-;;
-
-let rec size (t: 'a tree): int =
-	match t with
-	| Nil -> 0
-	| Node (_, child1, child2) -> 1 + size(child1) + size(child2)
-;;
-
-
-module Canvas = struct
-	include Ex00_graphics.Canvas ;;
+module Tree = struct
+	(* include Ex00_graphics.Tree ;; *)
+	type 'a tree = Nil | Node of 'a * 'a tree * 'a tree ;;
 
 	let get_example_tree (): string tree =
 		Node
@@ -79,6 +66,25 @@ module Canvas = struct
 		)
 	;;
 
+	let rec height (t: 'a tree): int =
+		match t with
+		| Nil -> 0
+		| Node (_, child1, child2) -> 1 + max (height(child1)) (height(child2))
+	;;
+	
+	let rec size (t: 'a tree): int =
+		match t with
+		| Nil -> 0
+		| Node (_, child1, child2) -> 1 + size(child1) + size(child2)
+	;;
+end
+
+module TreeCanvas = struct
+	include Ex00_graphics.Canvas ;;
+
+	let node_h     = 20 ;;
+	let node_mid_h = node_h / 2 ;;
+
 	let draw_tree_node
 		(value      : string )
 		(rect_x     : int    )
@@ -98,11 +104,11 @@ module Canvas = struct
 	;;
 
 	let draw_tree_edge
-		(node         : string tree )
-		(parent_right : int         )
-		(parent_mid_h : int         )
-		(child__left  : int         )
-		(child__mid_h : int         )
+		(node         : string Tree.tree )
+		(parent_right : int              )
+		(parent_mid_h : int              )
+		(child__left  : int              )
+		(child__mid_h : int              )
 	: unit =
 		match node with
 		| Nil -> ()
@@ -113,12 +119,12 @@ module Canvas = struct
 		)
 	;;
 
-	let draw_tree (tree: string tree): unit =
+	let draw_tree (tree: string Tree.tree): unit =
 
 		let rec rec_draw_tree
-			(tree       : string tree )
-			(root_pos   : int * int   )
-			(split_dist : int         )
+			(tree       : string Tree.tree )
+			(root_pos   : int * int        )
+			(split_dist : int              )
 		: unit =
 			match tree with
 			| Nil -> ()
@@ -173,7 +179,8 @@ module Canvas = struct
 end
 
 
-let example_tree = Canvas.get_example_tree();;
-let render = fun () -> Canvas.draw_tree (example_tree);;
 
-Canvas.run (render) ;;
+(* To test, uncomment the below *)
+(* let example_tree = Canvas.get_example_tree();; *)
+(* let render = fun () -> Canvas.draw_tree (example_tree);; *)
+(* Canvas.run (render) ;; *)

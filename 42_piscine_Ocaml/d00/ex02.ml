@@ -9,10 +9,12 @@ let rec power (a: int) (b: int): int =
 	match b with
 	| 0 -> 1
 	| 1 -> a
-	| n -> 
+	| n ->
+	(
 		let b             = power a (n / 2)                 in
 		let odd_power_val = (if n mod 2 == 0 then 1 else a) in
 		b * b * odd_power_val
+	)
 ;;
 
 let result1 = string_of_int(power 2 4);;
