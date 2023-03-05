@@ -82,8 +82,13 @@ end
 module TreeCanvas = struct
 	include Ex00_graphics.Canvas ;;
 
-	let node_h     = 20 ;;
-	let node_mid_h = node_h / 2 ;;
+	type orientation = Vertical | Horizontal ;;
+
+	let display_mode = Vertical;;
+	let node_h       = 20 ;;
+	let node_mid_h   = node_h / 2 ;;
+
+
 
 	let draw_tree_node
 		(value      : string )
@@ -103,7 +108,9 @@ module TreeCanvas = struct
 		draw_string value;
 	;;
 
-	let draw_tree_edge
+
+
+	let draw_tree_edge_vertical
 		(node         : string Tree.tree )
 		(parent_right : int              )
 		(parent_mid_h : int              )
@@ -118,6 +125,53 @@ module TreeCanvas = struct
 			lineto (child__left ) (child__mid_h);
 		)
 	;;
+
+
+	let draw_tree_edge_horizontal
+		(node         : string Tree.tree )
+		(parent_bot   : int              )
+		(parent_mid_w : int              )
+		(child__top   : int              )
+		(child__mid_w : int              )
+	: unit =
+		match node with
+		| Nil -> ()
+		| Node (_, _, _) ->
+		(
+			moveto (parent_bot) (parent_mid_w);
+			lineto (child__top) (child__mid_w);
+		)
+	;;
+
+
+	let draw_tree_edge
+		(node       : string Tree.tree )
+		(parent_out : int              )
+		(parent_mid : int              )
+		(child__in  : int              )
+		(child__mid : int              )
+	: unit =
+		match display_mode with
+		| Horizontal ->
+		(
+			draw_tree_edge_horizontal
+				(node       )
+				(parent_out )
+				(parent_mid )
+				(child__in  )
+				(child__mid )
+		)
+		| Vertical ->
+		(
+			draw_tree_edge_vertical
+				(node       )
+				(parent_mid )
+				(parent_out )
+				(child__mid )
+				(child__in  )
+		)
+	;;
+
 
 	let draw_tree (tree: string Tree.tree): unit =
 
@@ -135,14 +189,21 @@ module TreeCanvas = struct
 				let (    rect_w,     rect_h) = (str_size_x + 10, node_h) in (* str_siz_y + 10) in *)
 				let new_split_dist = split_dist / 2 in
 
-				let parent_right =        pos_x + rect_w         in
-				let child1_pos_x = parent_right + 20             in
-				let child2_pos_x = child1_pos_x                  in
-				let parent_mid_h =        pos_y + node_h / 2     in
-				let child1_pos_y =        pos_y + new_split_dist in
-				let child2_pos_y =        pos_y - new_split_dist in
-				let child1_mid_h = parent_mid_h + new_split_dist in
-				let child2_mid_h = parent_mid_h - new_split_dist in
+				let parent_out = if display_mode = Horizontal then pos_x + rect_w     else pos_y + rect_h     in
+				let parent_mid = if display_mode = Horizontal then pos_y + rect_h / 2 else pos_x + rect_w / 2 in
+
+				let child1_in = parent_out   + 20             in
+				let child2_in = child1_in                     in
+
+				let child1_pos_other = if display_mode = Horizontal then pos_y + new_split_dist else pos_x + new_split_dist in
+				let child2_pos_other = if display_mode = Horizontal then pos_y - new_split_dist else pos_x - new_split_dist in
+
+				let child1_mid = parent_mid + new_split_dist in
+				let child2_mid = parent_mid - new_split_dist in
+
+				let child1_pos = if display_mode = Horizontal then (child1_in, child1_pos_other) else (child1_pos_other, child1_in) in
+				let child2_pos = if display_mode = Horizontal then (child2_in, child2_pos_other) else (child2_pos_other, child2_in) in
+
 				draw_tree_node
 					(value      )
 					(pos_x      )
@@ -153,26 +214,30 @@ module TreeCanvas = struct
 					(str_size_y )
 				;
 				draw_tree_edge
-					(child1       )
-					(parent_right )
-					(parent_mid_h )
-					(child1_pos_x )
-					(child1_mid_h )
+					(child1     )
+					(parent_out )
+					(parent_mid )
+					(child1_in  )
+					(child1_mid )
 				;
 				draw_tree_edge
-					(child2       )
-					(parent_right )
-					(parent_mid_h )
-					(child2_pos_x )
-					(child2_mid_h )
+					(child2     )
+					(parent_out )
+					(parent_mid )
+					(child2_in  )
+					(child2_mid )
 				;
-				rec_draw_tree (child1) ((child1_pos_x, child1_pos_y)) (new_split_dist);
-				rec_draw_tree (child2) ((child2_pos_x, child2_pos_y)) (new_split_dist);
+				rec_draw_tree (child1) (child1_pos) (new_split_dist);
+				rec_draw_tree (child2) (child2_pos) (new_split_dist);
 			)
 		in
 
-		let init_split_dist = window_mid_h in
-		let root_pos        = (20, window_mid_h - node_h / 2) in
+		let init_split_dist = if display_mode = Horizontal then window_mid_h else window_mid_w in
+		let root_pos =
+			match display_mode with
+			| Horizontal -> (20,               window_mid_h - node_h / 2 )
+			| Vertical   -> (window_mid_w - 5, 20                        )
+		in 
 		rec_draw_tree (tree) (root_pos) (init_split_dist)
 	;;
 
