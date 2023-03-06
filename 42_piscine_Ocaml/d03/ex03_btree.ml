@@ -1,5 +1,7 @@
 open Ex01_gardening.TreeCanvas;;
 
+
+
 let rec power (a: int) (b: int): int =
 	match b with
 	| 0 -> 1
@@ -11,6 +13,8 @@ let rec power (a: int) (b: int): int =
 		b * b * odd_power_val
 	)
 ;;
+
+
 
 module BTree = struct
 
@@ -157,7 +161,11 @@ module BTree = struct
 		if not ( is_bst(bst) ) then failwith "cannot delete: not a bst" else ();
 
 		let rec find_successor (bst: 'a tree) (curr_succ: 'a tree): 'a tree =
-			let curr_succ_val = match curr_succ with | Node (v, _, _) -> v | _ -> failwith "find_successor bad impl" in
+			let curr_succ_val =
+				match curr_succ with
+				| Node (v, _, _) -> v
+				| _ -> failwith "find_successor bad impl"
+			in
 			match bst with
 			| Nil -> curr_succ
 			| Node (value, child_l, child_r) ->

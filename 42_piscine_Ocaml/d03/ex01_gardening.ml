@@ -10,6 +10,7 @@ module Tree = struct
 	(* include Ex00_graphics.Tree ;; *)
 	type 'a tree = Nil | Node of 'a * 'a tree * 'a tree ;;
 
+
 	let get_example_tree (): string tree =
 		Node
 		(
@@ -49,35 +50,49 @@ module Tree = struct
 		)
 	;;
 
-	let rec stringtree_of_tree
-		(tree            :  'a tree      )
-		(string_of_alpha : ('a -> string))
-	: string tree =
+
+	let rec map_tree
+		(tree   :  'a tree  )
+		(b_of_a : ('a -> 'b))
+	: 'b tree =
 		match tree with
 		| Nil -> Nil
 		| Node (value, child1, child2) ->
 		(
 			Node
 			(
-				string_of_alpha (value),
-				stringtree_of_tree (child1) (string_of_alpha),
-				stringtree_of_tree (child2) (string_of_alpha)
+				b_of_a (value),
+				map_tree (child1) (b_of_a),
+				map_tree (child2) (b_of_a)
 			)
 		)
 	;;
+
+
+	let stringtree_of_tree
+		(tree            :  'a tree      )
+		(string_of_alpha : ('a -> string))
+	: string tree =
+		map_tree (tree) (string_of_alpha)
+	;;
+
 
 	let rec height (t: 'a tree): int =
 		match t with
 		| Nil -> 0
 		| Node (_, child1, child2) -> 1 + max (height(child1)) (height(child2))
 	;;
-	
+
+
 	let rec size (t: 'a tree): int =
 		match t with
 		| Nil -> 0
 		| Node (_, child1, child2) -> 1 + size(child1) + size(child2)
 	;;
+
 end
+
+
 
 module TreeCanvas = struct
 	include Ex00_graphics.Canvas ;;
