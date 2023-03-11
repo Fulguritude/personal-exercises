@@ -37,7 +37,12 @@ sig
 	val eval : expr -> t ;;
 end
 
-module type MAKEEVALEXPR = functor (T: VAL) -> EVALEXPR with type t = T.t ;;
+module type MAKEEVALEXPR =
+	functor (T: VAL) ->
+	(
+		EVALEXPR with type t = T.t
+	)
+;;
 
 module MakeEvalExpr : MAKEEVALEXPR =
 	functor (T : VAL) ->
